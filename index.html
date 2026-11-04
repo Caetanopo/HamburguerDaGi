@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noite do Hambúrguer da Gi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-neutral-950 text-neutral-100 min-h-screen py-8 px-4 flex justify-center">
+
+    <div class="max-w-md w-full bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-2xl">
+
+        <!-- Cabeçalho -->
+        <div class="text-center mb-6">
+            <span class="text-xs uppercase tracking-widest text-amber-500 font-bold">Edição Especial</span>
+            <h1 class="text-3xl font-extrabold uppercase mt-1 tracking-tight text-white">Noite do Hambúrguer</h1>
+            <p class="text-amber-400 font-medium text-sm">Hambúrguer da Gi • Quantidade Limitada</p>
+        </div>
+
+        <!-- Card Produto -->
+        <div class="bg-neutral-800/60 border border-neutral-700/50 rounded-xl p-4 mb-6">
+            <div class="flex justify-between items-baseline mb-2">
+                <h2 class="text-lg font-bold text-white">Artesanal 180g</h2>
+                <span class="text-xl font-black text-amber-400">R$ 45,00</span>
+            </div>
+            <p class="text-xs text-neutral-300 leading-relaxed">
+                Carne 180g, Rúcula, Bacon crocante, Molho Gorgonzola, Cebola Caramelizada e Maionese Caseira.
+            </p>
+        </div>
+
+        <!-- Formulário -->
+        <form id="orderForm" class="space-y-4">
+
+            <div>
+                <label class="block text-xs font-semibold text-neutral-300 mb-1">Seu Nome Completo</label>
+                <input type="text" id="nome" required placeholder="Ex: Lucas Silva" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-neutral-300 mb-1">WhatsApp (com DDD)</label>
+                <input type="tel" id="telefone" placeholder="54 99999-9999" required class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-300 mb-1">Dia da Reserva</label>
+                    <select id="dia" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                        <option value="Sexta (06/11)">Sexta (06/11)</option>
+                        <option value="Sábado (07/11)">Sábado (07/11)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-neutral-300 mb-1">Quantidade</label>
+                    <input type="number" id="quantidade" min="1" value="1" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-neutral-300 mb-1">Tipo de Entrega</label>
+                <select id="tipoEntrega" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                    <option value="Retirada">Retirar (Rua Leoberto Leal, 67)</option>
+                    <option value="Tele">Tele-entrega (+1 burguer = Tele Grátis!)</option>
+                </select>
+            </div>
+
+            <!-- Campos de Tele-entrega -->
+            <div id="enderecoCampos" class="space-y-3 hidden border-t border-neutral-800 pt-3">
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="col-span-1">
+                        <label class="block text-xs font-semibold text-neutral-300 mb-1">CEP</label>
+                        <input type="text" id="cep" placeholder="99000-000" maxlength="9" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-xs font-semibold text-neutral-300 mb-1">Rua / Logradouro</label>
+                        <input type="text" id="rua" placeholder="Nome da rua" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-semibold text-neutral-300 mb-1">Número</label>
+                        <input type="text" id="numero" placeholder="Ex: 123, Apto 4" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-neutral-300 mb-1">Bairro</label>
+                        <input type="text" id="bairro" placeholder="Bairro" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold text-neutral-300 mb-1">Forma de Pagamento</label>
+                <select id="pagamento" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                    <option value="Pix">Pix (Chave informada no WhatsApp)</option>
+                    <option value="Cartao">Cartão de Crédito / Débito na Entrega</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
+            </div>
+
+            <!-- Resumo de Valores -->
+            <div class="bg-neutral-950 p-4 rounded-xl border border-neutral-800 space-y-1">
+                <div class="flex justify-between text-xs text-neutral-400">
+                    <span>Subtotal:</span>
+                    <span id="subtotalLabel">R$ 45,00</span>
+                </div>
+                <div class="flex justify-between text-xs text-neutral-400">
+                    <span>Tele-entrega:</span>
+                    <span id="taxaLabel" class="text-neutral-400">Não aplicável</span>
+                </div>
+                <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-neutral-800">
+                    <span>Total:</span>
+                    <span id="totalLabel" class="text-amber-400">R$ 45,00</span>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-600 font-bold text-neutral-950 py-3.5 rounded-xl transition duration-150 uppercase tracking-wide text-sm shadow-lg shadow-amber-500/10">
+                Confirmar Reserva e Enviar no WhatsApp
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const PRECO_BURGUER = 45.00;
+        const TAXA_TELE_PADRAO = 8.00;
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyRS2R4J61Z9GCUcCk5BVCBw6IwIKTPLmlC_-jSgv8kFart0NnARYicJHV0k3Ix3RN/exec";
+        const WHATSAPP_DESTINO = "5554991678057";
+
+        const qtdInput = document.getElementById('quantidade');
+        const tipoEntrega = document.getElementById('tipoEntrega');
+        const enderecoCampos = document.getElementById('enderecoCampos');
+        const subtotalLabel = document.getElementById('subtotalLabel');
+        const taxaLabel = document.getElementById('taxaLabel');
+        const totalLabel = document.getElementById('totalLabel');
+        const cepInput = document.getElementById('cep');
+
+        // Auto-completar endereço via CEP
+        cepInput.addEventListener('blur', async () => {
+            const cep = cepInput.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                try {
+                    const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                    const data = await res.json();
+                    if (!data.erro) {
+                        document.getElementById('rua').value = data.logradouro || '';
+                        document.getElementById('bairro').value = data.bairro || '';
+                        document.getElementById('numero').focus();
+                    }
+                } catch (e) {
+                    console.error("Erro ao buscar CEP", e);
+                }
+            }
+        });
+
+        function calcularValores() {
+            const qtd = parseInt(qtdInput.value) || 1;
+            const subtotal = qtd * PRECO_BURGUER;
+            let taxa = 0;
+
+            if (tipoEntrega.value === "Tele") {
+                enderecoCampos.classList.remove('hidden');
+                document.getElementById('rua').required = true;
+                document.getElementById('numero').required = true;
+                document.getElementById('bairro').required = true;
+
+                taxa = qtd > 1 ? 0 : TAXA_TELE_PADRAO;
+                taxaLabel.innerText = taxa === 0 ? "Grátis (Promoção +1 burguer)" : `R$ ${taxa.toFixed(2)}`;
+                taxaLabel.className = taxa === 0 ? "text-green-400 font-bold" : "text-neutral-300";
+            } else {
+                enderecoCampos.classList.add('hidden');
+                document.getElementById('rua').required = false;
+                document.getElementById('numero').required = false;
+                document.getElementById('bairro').required = false;
+
+                taxaLabel.innerText = "Não aplicável";
+                taxaLabel.className = "text-neutral-400";
+            }
+
+            const total = subtotal + taxa;
+            subtotalLabel.innerText = `R$ ${subtotal.toFixed(2)}`;
+            totalLabel.innerText = `R$ ${total.toFixed(2)}`;
+            return { qtd, subtotal, taxa, total };
+        }
+
+        qtdInput.addEventListener('input', calcularValores);
+        tipoEntrega.addEventListener('change', calcularValores);
+
+        document.getElementById('orderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Salvando pedido...";
+            btn.disabled = true;
+
+            const { qtd, total } = calcularValores();
+            const dados = {
+                nome: document.getElementById('nome').value,
+                telefone: document.getElementById('telefone').value,
+                dia: document.getElementById('dia').value,
+                tipoEntrega: tipoEntrega.value,
+                rua: document.getElementById('rua').value,
+                numero: document.getElementById('numero').value,
+                bairro: document.getElementById('bairro').value,
+                cep: document.getElementById('cep').value,
+                quantidade: qtd,
+                valorTotal: total.toFixed(2),
+                pagamento: document.getElementById('pagamento').value,
+                vendedor: "João"
+            };
+
+            try {
+                await fetch(APPS_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(dados)
+                });
+
+                const enderecoTexto = dados.tipoEntrega === 'Tele'
+                    ? `*Endereço:* ${dados.rua}, Nº ${dados.numero} - ${dados.bairro} (${dados.cep})\n`
+                    : `*Retirada:* Rua Leoberto Leal, 67\n`;
+
+                const msg = encodeURIComponent(
+                    `🍔 *RESERVA DE HAMBÚRGUER DA GI*\n\n` +
+                    `*Cliente:* ${dados.nome}\n` +
+                    `*WhatsApp:* ${dados.telefone}\n` +
+                    `*Dia Escolhido:* ${dados.dia}\n` +
+                    `*Quantidade:* ${dados.quantidade}x Hambúrguer Artesanal (180g)\n` +
+                    `*Entrega:* ${dados.tipoEntrega}\n` +
+                    enderecoTexto +
+                    `*Forma de Pagamento:* ${dados.pagamento}\n` +
+                    `*Total do Pedido:* R$ ${dados.valorTotal}\n\n` +
+                    `_Vendedor responsável: ${dados.vendedor}_`
+                );
+
+                window.location.href = `https://wa.me/${WHATSAPP_DESTINO}?text=${msg}`;
+            } catch (err) {
+                alert("Erro ao registrar pedido. Tente novamente ou entre em contato direto pelo WhatsApp.");
+                btn.disabled = false;
+                btn.innerText = "Confirmar Reserva e Enviar no WhatsApp";
+            }
+        });
+
+        calcularValores();
+    </script>
+</body>
+</html>
