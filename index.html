@@ -83,6 +83,12 @@
                 </div>
             </div>
 
+            <!-- Campo de Observações Adicionado Aqui -->
+            <div>
+                <label class="block text-xs font-semibold text-neutral-300 mb-1">Observações (Opcional)</label>
+                <input type="text" id="observacoes" placeholder="Ex: Sem rúcula, sem cebola..." class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 text-sm focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition">
+            </div>
+
             <div>
                 <label class="block text-xs font-semibold text-neutral-300 mb-1">Forma de Entrega</label>
                 <select id="tipoEntrega" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 text-sm focus:border-amber-500 outline-none font-medium">
@@ -180,7 +186,7 @@
         const PRECO_BURGUER = 45.00;
         const TAXA_TELE_1 = 15.00;
         const TAXA_TELE_MAIS = 10.00;
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyRS2R4J61Z9GCUcCk5BVCBw6IwIKTPLmlC_-jSgv8kFart0NnARYicJHV0k3Ix3RN/exec";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbww-IBp0Hgyoh2eOKWA-qPdLtAXQo9ji_uYrgcQFyU8dPdhnxhwGaGwUKC223mQDmdp/exec";
         const WHATSAPP_DESTINO = "5554991678057";
 
         const qtdInput = document.getElementById('quantidade');
@@ -287,11 +293,12 @@
                 quantidade: qtd,
                 valorTotal: total.toFixed(2),
                 pagamento: pagamentoSelect,
-                vendedor: "João"
+                vendedor: "João",
+                observacoes: document.getElementById('observacoes').value // Campo Observações capturado
             };
 
             try {
-                // 1. Grava na Planilha primeiro para você não perder o pedido
+                // 1. Grava na Planilha primeiro
                 await fetch(APPS_SCRIPT_URL, {
                     method: "POST",
                     mode: "no-cors",
@@ -302,17 +309,16 @@
                 // 2. Checkout Integrado InfinitePay (Se pagamento for Online)
                 if (pagamentoSelect === "Online") {
                     const payload = {
-                        handle: "$caetano_po", // ⚠️ IMPORTANTE: Coloque sua InfiniteTag aqui (sem o cifrão $)
+                        handle: "caetano_po",
                         items: [
                             {
                                 quantity: qtd,
-                                price: PRECO_BURGUER * 100, // Preço precisa ser em centavos (x 100)
-                                description: "Hambúrguer Artesanal 180g"
+                                price: PRECO_BURGUER * 100,
+                                description: "Hambúrguer Artesanal 180g" + (dados.observacoes ? ` (${dados.observacoes})` : "")
                             }
                         ]
                     };
 
-                    // Adiciona o valor da Tele como se fosse um produto no checkout
                     if (isTele && taxa > 0) {
                         payload.items.push({
                             quantity: 1,
@@ -335,7 +341,6 @@
                             const dataIp = await resIp.json();
                             const checkoutUrl = dataIp.url || (dataIp.data && dataIp.data.url) || dataIp.link;
                             if (checkoutUrl) {
-                                // Redireciona o cliente para finalizar o pagamento no Checkout da InfinitePay
                                 window.location.href = checkoutUrl;
                                 return;
                             }
@@ -344,17 +349,22 @@
                     } catch (checkoutErr) {
                         console.error(checkoutErr);
                         alert("Erro ao gerar link de pagamento online. Redirecionando para o WhatsApp para combinarmos...");
-                        const msgWhats = encodeURIComponent(`Olá! Acabei de registrar meu pedido (${dados.quantidade}x Hambúrguer). Tive um problema no carregamento do pagamento online, podemos combinar por aqui?`);
-                        window.location.href = `https://wa.me/${WHATSAPP_DESTINO}?text=${msgWhats}`;
+
+                        let msgWhats = `Olá! Acabei de registrar meu pedido (${dados.quantidade}x Hambúrguer). Tive um problema no carregamento do pagamento online, podemos combinar por aqui?`;
+                        if (dados.observacoes) msgWhats += `\n*Obs:* ${dados.observacoes}`;
+
+                        window.location.href = `https://wa.me/${WHATSAPP_DESTINO}?text=${encodeURIComponent(msgWhats)}`;
                         return;
                     }
                 }
 
-                // Se o pagamento for na entrega (Cartão/Maquininha ou Dinheiro):
-                const msgWhats = encodeURIComponent(`Olá! Acabei de registrar meu pedido (${dados.quantidade}x Hambúrguer) no site e o pagamento será na entrega. Vim confirmar o horário!`);
-                document.getElementById('btnWhatsModal').href = `https://wa.me/${WHATSAPP_DESTINO}?text=${msgWhats}`;
+                // Se o pagamento for na entrega (Cartão ou Dinheiro):
+                let txtWhatsBase = `Olá! Acabei de registrar meu pedido (${dados.quantidade}x Hambúrguer) no site e o pagamento será na entrega. Vim confirmar o horário!`;
+                if (dados.observacoes) txtWhatsBase += `\n*Obs:* ${dados.observacoes}`;
 
-                // Restaura Botão e Abre Modal de Sucesso
+                document.getElementById('btnWhatsModal').href = `https://wa.me/${WHATSAPP_DESTINO}?text=${encodeURIComponent(txtWhatsBase)}`;
+
+                // Restaura Botão e Abre Modal
                 btn.disabled = false;
                 btnText.innerText = "CONFIRMAR RESERVA";
                 btnSpinner.classList.add('hidden');
