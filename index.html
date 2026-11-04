@@ -92,7 +92,7 @@
             </div>
 
             <div id="promoAviso" class="hidden bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 text-xs text-amber-300 flex items-center justify-between">
-                <span>💡 <b>Dica de Ouro:</b> Peça mais 1 hambúrguer e a tele sai <b>100% GRÁTIS!</b></span>
+                <span>💡 <b>Dica:</b> Peça mais de 1 hambúrguer e a tele cai para <b>R$ 10,00!</b></span>
             </div>
 
             <div id="enderecoCampos" class="space-y-3 hidden border-t border-neutral-800 pt-3">
@@ -167,19 +167,19 @@
                 <span class="text-amber-400 font-semibold">Em breve, você receberá uma mensagem no WhatsApp</span> confirmando o horário exato da entrega ou retirada.
             </p>
 
-            <!-- Opcional: O botão leva o cliente direto pro seu WhatsApp caso ele esteja ansioso -->
             <a id="btnWhatsModal" href="#" target="_blank" class="block w-full bg-emerald-500 hover:bg-emerald-400 font-bold text-neutral-950 py-3.5 rounded-xl transition duration-150 uppercase tracking-wide text-sm mb-3">
                 Falar no WhatsApp Agora
             </a>
             <button onclick="fecharModal()" class="w-full bg-transparent border border-neutral-700 hover:border-neutral-500 font-medium text-neutral-400 hover:text-white py-3 rounded-xl transition duration-150 text-sm">
-                Fechar
+                Fechar e Fazer Novo Pedido
             </button>
         </div>
     </div>
 
     <script>
         const PRECO_BURGUER = 45.00;
-        const TAXA_TELE_PADRAO = 10.00;
+        const TAXA_TELE_1 = 15.00;
+        const TAXA_TELE_MAIS = 10.00;
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyRS2R4J61Z9GCUcCk5BVCBw6IwIKTPLmlC_-jSgv8kFart0NnARYicJHV0k3Ix3RN/exec";
         const WHATSAPP_DESTINO = "5554991678057";
 
@@ -222,12 +222,12 @@
                 document.getElementById('bairro').required = true;
 
                 if (qtd >= 2) {
-                    taxa = 0;
-                    taxaLabel.innerHTML = '<span class="text-emerald-400 font-extrabold uppercase">Grátis (Promoção +1) 🎉</span>';
+                    taxa = TAXA_TELE_MAIS;
+                    taxaLabel.innerHTML = `<span class="text-emerald-400 font-extrabold uppercase">R$ 10,00 (Desconto)</span>`;
                     promoAviso.classList.add('hidden');
                 } else {
-                    taxa = TAXA_TELE_PADRAO;
-                    taxaLabel.innerHTML = '<span class="text-neutral-200 font-semibold">R$ 10,00</span>';
+                    taxa = TAXA_TELE_1;
+                    taxaLabel.innerHTML = '<span class="text-neutral-200 font-semibold">R$ 15,00</span>';
                     promoAviso.classList.remove('hidden');
                 }
             } else {
@@ -257,6 +257,7 @@
             document.getElementById('sucessoModal').classList.add('hidden');
             document.getElementById('orderForm').reset();
             calcularValores();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
@@ -269,7 +270,7 @@
             btn.disabled = true;
             btnText.innerText = "REGISTRANDO PEDIDO...";
             btnSpinner.classList.remove('hidden');
-            btn.classList.replace('bg-amber-500', 'bg-amber-600'); // Escurece o botão
+            btn.classList.replace('bg-amber-500', 'bg-amber-600');
             btn.classList.remove('hover:bg-amber-400');
 
             const { qtd, total, isTele } = calcularValores();
@@ -285,7 +286,7 @@
                 quantidade: qtd,
                 valorTotal: total.toFixed(2),
                 pagamento: document.getElementById('pagamento').value,
-                vendedor: "João" // Sua comissão!
+                vendedor: "João"
             };
 
             try {
