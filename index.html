@@ -4,28 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noite do Hambúrguer da Gi</title>
+
+    <!-- Favicon direto via SVG (Funciona nativo no Netlify sem arquivo extra) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-neutral-950 text-neutral-100 min-h-screen py-8 px-4 flex justify-center">
+<body class="bg-neutral-950 text-neutral-100 min-h-screen py-6 px-4 flex justify-center">
 
-    <div class="max-w-md w-full bg-neutral-900 border border-neutral-800 rounded-2xl p-6 shadow-2xl">
+    <div class="max-w-md w-full bg-neutral-900 border border-neutral-800 rounded-3xl p-6 shadow-2xl">
 
         <!-- Cabeçalho -->
-        <div class="text-center mb-6">
-            <span class="text-xs uppercase tracking-widest text-amber-500 font-bold">Edição Especial</span>
-            <h1 class="text-3xl font-extrabold uppercase mt-1 tracking-tight text-white">Noite do Hambúrguer</h1>
-            <p class="text-amber-400 font-medium text-sm">Hambúrguer da Gi • Quantidade Limitada</p>
+        <div class="text-center mb-5">
+            <span class="inline-block bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2">
+                Edição Especial Limitada
+            </span>
+            <h1 class="text-3xl font-black uppercase tracking-tight text-white">Noite do Hambúrguer</h1>
+            <p class="text-neutral-400 text-xs mt-0.5">Hambúrguer da Gi • Receita Artesanal</p>
         </div>
 
-        <!-- Card Produto -->
-        <div class="bg-neutral-800/60 border border-neutral-700/50 rounded-xl p-4 mb-6">
-            <div class="flex justify-between items-baseline mb-2">
-                <h2 class="text-lg font-bold text-white">Artesanal 180g</h2>
-                <span class="text-xl font-black text-amber-400">R$ 45,00</span>
+        <!-- Card de Apresentação e Ingredientes -->
+        <div class="bg-neutral-950/80 border border-neutral-800 rounded-2xl p-4 mb-5 shadow-inner">
+            <div class="flex justify-between items-start border-b border-neutral-800/80 pb-3 mb-3">
+                <div>
+                    <h2 class="text-xl font-black text-white">Artesanal Clássico</h2>
+                    <span class="text-xs text-amber-500 font-semibold tracking-wide">Pão brioche selado na manteiga</span>
+                </div>
+                <div class="text-right">
+                    <span class="text-2xl font-black text-amber-400">R$ 45</span>
+                    <span class="text-xs text-neutral-400 block -mt-1">/unidade</span>
+                </div>
             </div>
-            <p class="text-xs text-neutral-300 leading-relaxed">
-                Carne 180g, Rúcula, Bacon crocante, Molho Gorgonzola, Cebola Caramelizada e Maionese Caseira.
-            </p>
+
+            <!-- Destaque dos Ingredientes em Badges -->
+            <label class="block text-[11px] font-bold uppercase tracking-wider text-neutral-400 mb-2">O que vai no seu burger:</label>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+                <div class="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-3 py-2 rounded-xl text-neutral-200">
+                    <span class="text-base">🥩</span>
+                    <span class="font-bold text-amber-300">Carne 180g</span>
+                </div>
+                <div class="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-3 py-2 rounded-xl text-neutral-200">
+                    <span class="text-base">🥓</span>
+                    <span class="font-medium">Bacon Crocante</span>
+                </div>
+                <div class="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-3 py-2 rounded-xl text-neutral-200">
+                    <span class="text-base">🧀</span>
+                    <span class="font-medium">Molho Gorgonzola</span>
+                </div>
+                <div class="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-3 py-2 rounded-xl text-neutral-200">
+                    <span class="text-base">🧅</span>
+                    <span class="font-medium">Cebola Caramelizada</span>
+                </div>
+                <div class="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-3 py-2 rounded-xl text-neutral-200">
+                    <span class="text-base">🌿</span>
+                    <span class="font-medium">Rúcula Fresca</span>
+                </div>
+                <div class="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-3 py-2 rounded-xl text-neutral-200">
+                    <span class="text-base">🥣</span>
+                    <span class="font-medium">Maionese Caseira</span>
+                </div>
+            </div>
         </div>
 
         <!-- Formulário -->
@@ -33,86 +71,91 @@
 
             <div>
                 <label class="block text-xs font-semibold text-neutral-300 mb-1">Seu Nome Completo</label>
-                <input type="text" id="nome" required placeholder="Ex: Lucas Silva" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                <input type="text" id="nome" required placeholder="Ex: Lucas Silva" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 text-sm focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition">
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-neutral-300 mb-1">WhatsApp (com DDD)</label>
-                <input type="tel" id="telefone" placeholder="54 99999-9999" required class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                <label class="block text-xs font-semibold text-neutral-300 mb-1">WhatsApp</label>
+                <input type="tel" id="telefone" placeholder="(54) 99999-9999" required class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 text-sm focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition">
             </div>
 
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <label class="block text-xs font-semibold text-neutral-300 mb-1">Dia da Reserva</label>
-                    <select id="dia" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                    <select id="dia" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 text-sm focus:border-amber-500 outline-none">
                         <option value="Sexta (06/11)">Sexta (06/11)</option>
                         <option value="Sábado (07/11)">Sábado (07/11)</option>
                     </select>
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-neutral-300 mb-1">Quantidade</label>
-                    <input type="number" id="quantidade" min="1" value="1" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                    <input type="number" id="quantidade" min="1" value="1" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 text-sm focus:border-amber-500 outline-none font-bold text-center">
                 </div>
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-neutral-300 mb-1">Tipo de Entrega</label>
-                <select id="tipoEntrega" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                <label class="block text-xs font-semibold text-neutral-300 mb-1">Forma de Entrega</label>
+                <select id="tipoEntrega" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 text-sm focus:border-amber-500 outline-none font-medium">
                     <option value="Retirada">Retirar (Rua Leoberto Leal, 67)</option>
-                    <option value="Tele">Tele-entrega (+1 burguer = Tele Grátis!)</option>
+                    <option value="Tele">Tele-entrega (+1 burguer ganha Frete Grátis!)</option>
                 </select>
             </div>
 
-            <!-- Campos de Tele-entrega -->
+            <!-- Aviso Promocional Dinâmico -->
+            <div id="promoAviso" class="hidden bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 text-xs text-amber-300 flex items-center justify-between">
+                <span>💡 <b>Dica de Ouro:</b> Peça mais 1 hambúrguer e a tele sai <b>100% GRÁTIS!</b></span>
+            </div>
+
+            <!-- Endereço (Abre somente na Tele) -->
             <div id="enderecoCampos" class="space-y-3 hidden border-t border-neutral-800 pt-3">
                 <div class="grid grid-cols-3 gap-2">
                     <div class="col-span-1">
                         <label class="block text-xs font-semibold text-neutral-300 mb-1">CEP</label>
-                        <input type="text" id="cep" placeholder="99000-000" maxlength="9" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                        <input type="text" id="cep" placeholder="99000-000" maxlength="9" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2.5 text-sm focus:border-amber-500 outline-none">
                     </div>
                     <div class="col-span-2">
-                        <label class="block text-xs font-semibold text-neutral-300 mb-1">Rua / Logradouro</label>
-                        <input type="text" id="rua" placeholder="Nome da rua" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                        <label class="block text-xs font-semibold text-neutral-300 mb-1">Rua</label>
+                        <input type="text" id="rua" placeholder="Nome da rua" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2.5 text-sm focus:border-amber-500 outline-none">
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <label class="block text-xs font-semibold text-neutral-300 mb-1">Número</label>
-                        <input type="text" id="numero" placeholder="Ex: 123, Apto 4" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                        <input type="text" id="numero" placeholder="Ex: 123, Casa" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2.5 text-sm focus:border-amber-500 outline-none">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-neutral-300 mb-1">Bairro</label>
-                        <input type="text" id="bairro" placeholder="Bairro" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                        <input type="text" id="bairro" placeholder="Bairro" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-2.5 text-sm focus:border-amber-500 outline-none">
                     </div>
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-semibold text-neutral-300 mb-1">Forma de Pagamento</label>
-                <select id="pagamento" class="w-full bg-neutral-950 border border-neutral-800 rounded-lg p-2.5 text-sm focus:border-amber-500 outline-none">
+                <select id="pagamento" class="w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 text-sm focus:border-amber-500 outline-none">
                     <option value="Pix">Pix (Chave informada no WhatsApp)</option>
                     <option value="Cartao">Cartão de Crédito / Débito na Entrega</option>
                     <option value="Dinheiro">Dinheiro</option>
                 </select>
             </div>
 
-            <!-- Resumo de Valores -->
-            <div class="bg-neutral-950 p-4 rounded-xl border border-neutral-800 space-y-1">
+            <!-- Totais -->
+            <div class="bg-neutral-950 p-4 rounded-2xl border border-neutral-800 space-y-1.5">
                 <div class="flex justify-between text-xs text-neutral-400">
                     <span>Subtotal:</span>
-                    <span id="subtotalLabel">R$ 45,00</span>
+                    <span id="subtotalLabel" class="text-neutral-200 font-medium">R$ 45,00</span>
                 </div>
                 <div class="flex justify-between text-xs text-neutral-400">
                     <span>Tele-entrega:</span>
                     <span id="taxaLabel" class="text-neutral-400">Não aplicável</span>
                 </div>
-                <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-neutral-800">
-                    <span>Total:</span>
-                    <span id="totalLabel" class="text-amber-400">R$ 45,00</span>
+                <div class="flex justify-between text-base font-black text-white pt-2 border-t border-neutral-800">
+                    <span>Total Final:</span>
+                    <span id="totalLabel" class="text-amber-400 text-lg">R$ 45,00</span>
                 </div>
             </div>
 
-            <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-600 font-bold text-neutral-950 py-3.5 rounded-xl transition duration-150 uppercase tracking-wide text-sm shadow-lg shadow-amber-500/10">
+            <button type="submit" id="submitBtn" class="w-full bg-amber-500 hover:bg-amber-400 font-black text-neutral-950 py-4 rounded-2xl transition duration-150 uppercase tracking-wider text-sm shadow-lg shadow-amber-500/20 active:scale-[0.98]">
                 Confirmar Reserva e Enviar no WhatsApp
             </button>
         </form>
@@ -120,19 +163,20 @@
 
     <script>
         const PRECO_BURGUER = 45.00;
-        const TAXA_TELE_PADRAO = 8.00;
+        const TAXA_TELE_PADRAO = 10.00; // 1 hambúrguer = R$ 10
         const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyyRS2R4J61Z9GCUcCk5BVCBw6IwIKTPLmlC_-jSgv8kFart0NnARYicJHV0k3Ix3RN/exec";
         const WHATSAPP_DESTINO = "5554991678057";
 
         const qtdInput = document.getElementById('quantidade');
         const tipoEntrega = document.getElementById('tipoEntrega');
         const enderecoCampos = document.getElementById('enderecoCampos');
+        const promoAviso = document.getElementById('promoAviso');
         const subtotalLabel = document.getElementById('subtotalLabel');
         const taxaLabel = document.getElementById('taxaLabel');
         const totalLabel = document.getElementById('totalLabel');
         const cepInput = document.getElementById('cep');
 
-        // Auto-completar endereço via CEP
+        // Preenchimento de endereço via CEP
         cepInput.addEventListener('blur', async () => {
             const cep = cepInput.value.replace(/\D/g, '');
             if (cep.length === 8) {
@@ -145,60 +189,76 @@
                         document.getElementById('numero').focus();
                     }
                 } catch (e) {
-                    console.error("Erro ao buscar CEP", e);
+                    console.error("Erro no CEP", e);
                 }
             }
         });
 
+        // Cálculo dinâmico infalível
         function calcularValores() {
-            const qtd = parseInt(qtdInput.value) || 1;
+            let qtd = parseInt(qtdInput.value, 10);
+            if (isNaN(qtd) || qtd < 1) qtd = 1;
+
             const subtotal = qtd * PRECO_BURGUER;
             let taxa = 0;
+            const isTele = (tipoEntrega.value === "Tele");
 
-            if (tipoEntrega.value === "Tele") {
+            if (isTele) {
                 enderecoCampos.classList.remove('hidden');
                 document.getElementById('rua').required = true;
                 document.getElementById('numero').required = true;
                 document.getElementById('bairro').required = true;
 
-                taxa = qtd > 1 ? 0 : TAXA_TELE_PADRAO;
-                taxaLabel.innerText = taxa === 0 ? "Grátis (Promoção +1 burguer)" : `R$ ${taxa.toFixed(2)}`;
-                taxaLabel.className = taxa === 0 ? "text-green-400 font-bold" : "text-neutral-300";
+                if (qtd >= 2) {
+                    taxa = 0;
+                    taxaLabel.innerHTML = '<span class="text-emerald-400 font-extrabold uppercase">Grátis (Promoção +1) 🎉</span>';
+                    promoAviso.classList.add('hidden');
+                } else {
+                    taxa = TAXA_TELE_PADRAO; // R$ 10,00
+                    taxaLabel.innerHTML = '<span class="text-neutral-200 font-semibold">R$ 10,00</span>';
+                    promoAviso.classList.remove('hidden');
+                }
             } else {
                 enderecoCampos.classList.add('hidden');
                 document.getElementById('rua').required = false;
                 document.getElementById('numero').required = false;
                 document.getElementById('bairro').required = false;
 
-                taxaLabel.innerText = "Não aplicável";
-                taxaLabel.className = "text-neutral-400";
+                taxa = 0;
+                taxaLabel.innerHTML = '<span class="text-neutral-500">Não aplicável (Retirada)</span>';
+                promoAviso.classList.add('hidden');
             }
 
             const total = subtotal + taxa;
-            subtotalLabel.innerText = `R$ ${subtotal.toFixed(2)}`;
-            totalLabel.innerText = `R$ ${total.toFixed(2)}`;
-            return { qtd, subtotal, taxa, total };
+            subtotalLabel.innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            totalLabel.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+
+            return { qtd, subtotal, taxa, total, isTele };
         }
 
-        qtdInput.addEventListener('input', calcularValores);
-        tipoEntrega.addEventListener('change', calcularValores);
+        // Ouvintes para recalcular em qualquer interação
+        ['input', 'change', 'keyup', 'click'].forEach(evt => {
+            qtdInput.addEventListener(evt, calcularValores);
+            tipoEntrega.addEventListener(evt, calcularValores);
+        });
 
+        // Submissão
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.innerText = "Salvando pedido...";
+            btn.innerText = "Registrando pedido...";
             btn.disabled = true;
 
-            const { qtd, total } = calcularValores();
+            const { qtd, total, isTele } = calcularValores();
             const dados = {
                 nome: document.getElementById('nome').value,
                 telefone: document.getElementById('telefone').value,
                 dia: document.getElementById('dia').value,
                 tipoEntrega: tipoEntrega.value,
-                rua: document.getElementById('rua').value,
-                numero: document.getElementById('numero').value,
-                bairro: document.getElementById('bairro').value,
-                cep: document.getElementById('cep').value,
+                rua: isTele ? document.getElementById('rua').value : '',
+                numero: isTele ? document.getElementById('numero').value : '',
+                bairro: isTele ? document.getElementById('bairro').value : '',
+                cep: isTele ? document.getElementById('cep').value : '',
                 quantidade: qtd,
                 valorTotal: total.toFixed(2),
                 pagamento: document.getElementById('pagamento').value,
@@ -213,7 +273,7 @@
                     body: JSON.stringify(dados)
                 });
 
-                const enderecoTexto = dados.tipoEntrega === 'Tele'
+                const enderecoTexto = isTele
                     ? `*Endereço:* ${dados.rua}, Nº ${dados.numero} - ${dados.bairro} (${dados.cep})\n`
                     : `*Retirada:* Rua Leoberto Leal, 67\n`;
 
@@ -226,15 +286,14 @@
                     `*Entrega:* ${dados.tipoEntrega}\n` +
                     enderecoTexto +
                     `*Forma de Pagamento:* ${dados.pagamento}\n` +
-                    `*Total do Pedido:* R$ ${dados.valorTotal}\n\n` +
+                    `*Total do Pedido:* R$ ${dados.valorTotal.replace('.', ',')}\n\n` +
                     `_Vendedor responsável: ${dados.vendedor}_`
                 );
 
                 window.location.href = `https://wa.me/${WHATSAPP_DESTINO}?text=${msg}`;
             } catch (err) {
-                alert("Erro ao registrar pedido. Tente novamente ou entre em contato direto pelo WhatsApp.");
-                btn.disabled = false;
-                btn.innerText = "Confirmar Reserva e Enviar no WhatsApp";
+                alert("Erro ao gravar pedido. Redirecionando direto para o WhatsApp...");
+                window.location.href = `https://wa.me/${WHATSAPP_DESTINO}`;
             }
         });
 
